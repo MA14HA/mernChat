@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "server.js",
+	"engines": {
+    "node": "20.x"
+  },
 	"scripts": {
 		"server": "nodemon backend/server.js",
 		"start": "node backend/server.js",
@@ -23,10 +26,6 @@
 	},
 	"devDependencies": {
 		"nodemon": "^3.1.11"
-	},
-	{
-  "engines": {
-    "node": "20.x"
-  }
+	}
 
 }

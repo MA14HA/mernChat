@@ -12,7 +12,7 @@ const useSignup = () => {
 
 		setLoading(true);
 		try {
-			const res = await fetch("/api/auth/signup", {
+			const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ fullName, username, password, confirmPassword, gender }),
@@ -22,6 +22,7 @@ const useSignup = () => {
 			if (data.error) {
 				throw new Error(data.error);
 			}
+
 			localStorage.setItem("chat-user", JSON.stringify(data));
 			setAuthUser(data);
 		} catch (error) {
@@ -34,22 +35,3 @@ const useSignup = () => {
 	return { loading, signup };
 };
 export default useSignup;
-
-function handleInputErrors({ fullName, username, password, confirmPassword, gender }) {
-	if (!fullName || !username || !password || !confirmPassword || !gender) {
-		toast.error("Please fill in all fields");
-		return false;
-	}
-
-	if (password !== confirmPassword) {
-		toast.error("Passwords do not match");
-		return false;
-	}
-
-	if (password.length < 6) {
-		toast.error("Password must be at least 6 characters");
-		return false;
-	}
-
-	return true;
-}
